@@ -1,7 +1,6 @@
 import {v4} from 'uuid';
 export const addCard = (cat, text) => {
   const card = {id: v4(), text};
-  console.log(cat, card);
   return {
     type: "ADD_CARD",
     card,
