@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {MiddleCard, LeftCard, RightCard} from './Cards';
 import {connect} from 'react-redux';
-import {addCard, moveCard} from '../actions';
+import {addCard, moveCard, removeCard} from '../actions';
 import { bindActionCreators } from 'redux'
 
 class Column extends Component{
@@ -30,20 +30,35 @@ class Column extends Component{
     this.props.moveCard(currentCat, prevCat, i)
   }
 
+  onRemoveCard = (i) => {
+    const {currentCat} = this.props;
+    this.props.removeCard(currentCat, i);
+  }
+  
   renderCards = () => {
     const {cards, pos} = this.props;
     switch (pos) {
       case "left":
-        return cards.map(c=><LeftCard key={c.id} content={c.text} moveToRight={()=>this.onClickLeft(c.id)}/>);
+        return cards.map(c =>
+                            <LeftCard key={c.id} content={c.text} 
+                              moveToRight={()=>this.onClickLeft(c.id)}
+                              removeCard={()=>this.onRemoveCard(c.id)}
+                            />  
+                        );
       case "middle":
         return cards.map(c => 
                           <MiddleCard key={c.id} content={c.text} 
                             moveToRight={()=>this.onClickRight(c.id)}
                             moveToLeft={()=>this.onClickLeft(c.id)}
+                            removeCard={()=>this.onRemoveCard(c.id)}
                           />
                         )
       case "right":
-        return cards.map(c=><RightCard key={c.id} content={c.text} moveToLeft={()=>this.onClickRight(c.id)}/>)
+        return cards.map(c =>
+                          <RightCard key={c.id} content={c.text} 
+                            moveToLeft={()=>this.onClickRight(c.id)}
+                          />
+                        )
       default:
         return ;
     }
@@ -66,7 +81,8 @@ class Column extends Component{
 const mapDispatchToProps = (dispatch) => {
   return {
     addCard: bindActionCreators(addCard, dispatch),
-    moveCard: bindActionCreators(moveCard, dispatch)
+    moveCard: bindActionCreators(moveCard, dispatch),
+    removeCard: bindActionCreators(removeCard, dispatch)
   }
 }
 

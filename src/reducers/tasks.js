@@ -1,20 +1,21 @@
 const tasks = (state, action) => {
+  const {currentCat, card, nextCat, id} = action;
   switch (action.type) {
-    case "ADD_CARD":
-      const {cat, card} = action;
-      const newCards = [...state[cat], card];
+    case "ADD_CARD": 
       return {
         ...state,
-        [cat]: newCards
+        [currentCat]: [...state[currentCat], card]
       }
     case "MOVE_CARD":
-      const {currentCat, nextCat, id} = action;
-      const newCurrentCards = state[currentCat].filter(c=>c.id!==id);
-      const newNextCards = [...state[nextCat], ...state[currentCat].filter(c=>c.id===id)];
       return {
         ...state,
-        [currentCat]: newCurrentCards,
-        [nextCat]: newNextCards
+        [currentCat]: state[currentCat].filter(c=>c.id!==id),
+        [nextCat]: [...state[nextCat], ...state[currentCat].filter(c=>c.id===id)]
+      }
+    case "REMOVE_CARD":
+      return {
+        ...state,
+        [currentCat]: state[currentCat].filter(c=>c.id!==id),
       }
     default:
       return state;

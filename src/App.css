@@ -36,7 +36,6 @@ body {
 }
 
 .column {
-  
   margin: 0 12.5px;
 }
 
@@ -50,11 +49,22 @@ body {
 
 .card {
   display: flex;
+  position: relative;
   flex-direction: row;
   width: 300px;
   padding: 20px;
   background: white;
   margin: 5px 0;
+}
+.remove-card {
+  position: absolute;
+  right: 2px;
+  top: 0;
+  color: gray;
+  cursor: pointer;
+}
+.remove-card:hover {
+  color: red
 }
 
 .left-arrow{
