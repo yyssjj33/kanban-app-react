@@ -1,11 +1,4 @@
-const initState = {
-  todo: [],
-  progress: [],
-  review: [],
-  done: []
-}
-
-const tasks = (state=initState, action) => {
+const tasks = (state, action) => {
   switch (action.type) {
     case "ADD_CARD":
       const {cat, card} = action;

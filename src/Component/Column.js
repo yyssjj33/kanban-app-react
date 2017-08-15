@@ -6,6 +6,10 @@ import { bindActionCreators } from 'redux'
 
 class Column extends Component{
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.cards !== nextProps.cards;
+  }
+
   addCard = () => {
     const {currentCat} = this.props;
     const text = window.prompt("Add new card content!");

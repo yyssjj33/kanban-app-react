@@ -1,5 +1,5 @@
 body {
-  background-color: lightgray;
+  background-color: #f0f0f0;
 }
 * {
   box-sizing: border-box;
@@ -10,7 +10,6 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: lightgrey;
   margin-top: 50px;
   padding: 40px;
 }
