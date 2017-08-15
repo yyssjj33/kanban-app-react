@@ -32,7 +32,11 @@ class Column extends Component{
 
   onRemoveCard = (i) => {
     const {currentCat} = this.props;
-    this.props.removeCard(currentCat, i);
+    if(window.confirm('Conform to remove card!')){
+      this.props.removeCard(currentCat, i);
+    } else {
+      return;
+    }
   }
 
   renderCards = () => {
@@ -47,17 +51,18 @@ class Column extends Component{
                         );
       case "middle":
         return cards.map(c => 
-                          <MiddleCard key={c.id} content={c.text} 
-                            moveToRight={()=>this.onClickRight(c.id)}
-                            moveToLeft={()=>this.onClickLeft(c.id)}
-                            removeCard={()=>this.onRemoveCard(c.id)}
-                          />
+                            <MiddleCard key={c.id} content={c.text} 
+                              moveToRight={()=>this.onClickRight(c.id)}
+                              moveToLeft={()=>this.onClickLeft(c.id)}
+                              removeCard={()=>this.onRemoveCard(c.id)}
+                            />
                         )
       case "right":
         return cards.map(c =>
-                          <RightCard key={c.id} content={c.text} 
-                            moveToLeft={()=>this.onClickRight(c.id)}
-                          />
+                            <RightCard key={c.id} content={c.text} 
+                              moveToLeft={()=>this.onClickRight(c.id)}
+                              removeCard={()=>this.onRemoveCard(c.id)}
+                            />
                         )
       default:
         return ;
@@ -73,7 +78,7 @@ class Column extends Component{
       <div>
         {this.renderCards()}
       </div>
-      {pos==="left"?<button onClick={this.addCard}>Add Card</button>:null}
+      {pos==="left"?<button className="add-card" onClick={this.addCard}>Add Card</button>:null}
     </div>
   }
 }
