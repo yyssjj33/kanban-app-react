@@ -34,7 +34,7 @@ class Column extends Component{
     const {currentCat} = this.props;
     this.props.removeCard(currentCat, i);
   }
-  
+
   renderCards = () => {
     const {cards, pos} = this.props;
     switch (pos) {
@@ -65,7 +65,7 @@ class Column extends Component{
   }
 
   render() {
-    const {style, currentCat} = this.props;
+    const {style, currentCat, pos} = this.props;
     return <div className="column">
       <div className="column-header" style={style}>
         {currentCat[0].toUpperCase()+currentCat.substr(1)}
@@ -73,7 +73,7 @@ class Column extends Component{
       <div>
         {this.renderCards()}
       </div>
-      <button onClick={this.addCard}>Add Card</button>
+      {pos==="left"?<button onClick={this.addCard}>Add Card</button>:null}
     </div>
   }
 }
